@@ -1,6 +1,7 @@
-import CardList from "./CardList"
-import SearchInput from "./SearchInput";
+import CardList from "./components/CardList"
+import SearchInput from "./components/SearchInput";
 import { useState, useEffect } from "react";
+import Scroll from "./components/Scroll";
 
 const App = () => {
 
@@ -16,14 +17,16 @@ const App = () => {
             });
     },[])
 
-    if(allRobots.length === 0) return <h1>Loading...</h1>
-
-    return(
+     return !allRobots.length ? 
+     <h1>Loading...</h1> :
+     ( 
         <div className="tc">
             <SearchInput setSearchedRobots={setSearchedRobots} robots={allRobots}/>
-            <CardList searchedRobots={searchedRobots} />
+            <Scroll>
+                <CardList searchedRobots={searchedRobots} />
+            </Scroll>
         </div>
-    )
+     )
 }
 
 export default App
